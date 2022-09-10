@@ -1,6 +1,13 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import blueplanet from './blueplanet.jpg';
+import colin from './colin.jpg';
+import pink from './pink.jpg';
+import lunarpink from './lunarpink.jpg';
+import violetblue from './violetblue.png';
+import yellowgalaxy from './yellowgalaxy.png';
+import space from './space.jpg';
 // Create a scene
 const scene = new THREE.Scene();
 
@@ -38,7 +45,7 @@ function lightControls() {
 //create a cube and add it to the scene
 const mario = newMario();
 function newMario() {
-  const marioTexture = new THREE.TextureLoader().load('colin.jpg');
+  const marioTexture = new THREE.TextureLoader().load(colin);
   const mario = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: marioTexture }));
   scene.add(mario);
 
@@ -51,8 +58,8 @@ function newMario() {
 
 const moon = newMoon();
 function newMoon() {
-  const moonTexture = new THREE.TextureLoader().load('pink.jpg');
-  const normalTexture = new THREE.TextureLoader().load('lunarpink.jpg');
+  const moonTexture = new THREE.TextureLoader().load(pink);
+  const normalTexture = new THREE.TextureLoader().load(lunarpink);
 
   const moon = new THREE.Mesh(
     new THREE.SphereGeometry(3, 32, 32),
@@ -71,8 +78,8 @@ moon.position.setX(-10);
 //create second moon
 const moon2 = newMoon2();
 function newMoon2() {
-  const moonTexture = new THREE.TextureLoader().load('blueplanet.jpg');
-  const normalTexture = new THREE.TextureLoader().load('lunarpink.jpg');
+  const moonTexture = new THREE.TextureLoader().load(blueplanet);
+  const normalTexture = new THREE.TextureLoader().load(lunarpink);
 
   const moon2 = new THREE.Mesh(
     new THREE.SphereGeometry(3, 32, 32),
@@ -91,8 +98,8 @@ moon2.position.setX(-15);
 
 const moon3 = newMoon3();
 function newMoon3() {
-  const moonTexture = new THREE.TextureLoader().load('violetblue.png');
-  const normalTexture = new THREE.TextureLoader().load('lunarpink.jpg');
+  const moonTexture = new THREE.TextureLoader().load(violetblue);
+  const normalTexture = new THREE.TextureLoader().load(lunarpink);
 
   const moon3 = new THREE.Mesh(
     new THREE.SphereGeometry(3, 32, 32),
@@ -112,7 +119,7 @@ moon3.position.setX(-15);
 
 
 function torus() {
-  const luigiTexture = new THREE.TextureLoader().load('yellowgalaxy.png');
+  const luigiTexture = new THREE.TextureLoader().load(yellowgalaxy);
   const geometry = new THREE.TorusGeometry(10, 2.8, 16, 100);
   const material = new THREE.MeshStandardMaterial({ map: luigiTexture });
   const torus = new THREE.Mesh(geometry, material);
@@ -173,7 +180,7 @@ function newTriangle() {
 Array(250).fill().forEach(addStar);
 
 //Set background scene
-const spaceTexture = new THREE.TextureLoader().load('space.jpg');
+const spaceTexture = new THREE.TextureLoader().load(space);
 scene.background = spaceTexture;
 
 
