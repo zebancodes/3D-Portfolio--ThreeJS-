@@ -128,7 +128,7 @@ function torus() {
 }
 
 function torus2() {
-  const luigiTexture = new THREE.TextureLoader().load('lightblue.png');
+  const luigiTexture = new THREE.TextureLoader().load(lightblue);
   const geometry = new THREE.TorusGeometry(5, 0.3, 16, 100);
   const material = new THREE.MeshStandardMaterial({ map: luigiTexture });
   const torus2 = new THREE.Mesh(geometry, material);
