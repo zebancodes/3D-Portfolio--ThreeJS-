@@ -6,9 +6,11 @@ import colin from './colin.jpg';
 import pink from './pink.jpg';
 import lunarpink from './lunarpink.jpg';
 import violetblue from './violetblue.png';
-import yellowgalaxy from './yellowgalaxy.png';
+import silvergalaxy from './silvergalaxy.jpg';
 import space from './space.jpg';
 import lightblue from './lightblue.png';
+
+
 // Create a scene
 const scene = new THREE.Scene();
 
@@ -120,7 +122,7 @@ moon3.position.setX(-15);
 
 
 function torus() {
-  const luigiTexture = new THREE.TextureLoader().load(yellowgalaxy);
+  const luigiTexture = new THREE.TextureLoader().load(silvergalaxy);
   const geometry = new THREE.TorusGeometry(10, 2.8, 16, 100);
   const material = new THREE.MeshStandardMaterial({ map: luigiTexture });
   const torus = new THREE.Mesh(geometry, material);
