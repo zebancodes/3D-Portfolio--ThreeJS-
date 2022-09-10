@@ -8,6 +8,7 @@ import lunarpink from './lunarpink.jpg';
 import violetblue from './violetblue.png';
 import yellowgalaxy from './yellowgalaxy.png';
 import space from './space.jpg';
+import lightblue from './lightblue.png';
 // Create a scene
 const scene = new THREE.Scene();
 
