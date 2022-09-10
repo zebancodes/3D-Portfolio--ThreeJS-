@@ -112,8 +112,8 @@ moon3.position.setX(-15);
 
 
 function torus() {
-  const luigiTexture = new THREE.TextureLoader().load('darkgreen.png');
-  const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+  const luigiTexture = new THREE.TextureLoader().load('yellowgalaxy.png');
+  const geometry = new THREE.TorusGeometry(10, 2.8, 16, 100);
   const material = new THREE.MeshStandardMaterial({ map: luigiTexture });
   const torus = new THREE.Mesh(geometry, material);
 
