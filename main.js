@@ -1,14 +1,14 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import blueplanet from './blueplanet.jpg';
-import colin from './colin.jpg';
-import pink from './pink.jpg';
-import lunarpink from './lunarpink.jpg';
-import violetblue from './violetblue.png';
-import silvergalaxy from './silvergalaxy.jpg';
-import space from './space.jpg';
-import lightblue from './lightblue.png';
+import blueplanet from './images/blueplanet.jpg';
+import colin from './images/colin.jpg';
+import pink from './images/pink.jpg';
+import lunarpink from './images/lunarpink.jpg';
+import violetblue from './images/violetblue.png';
+import silvergalaxy from './images/silvergalaxy.jpg';
+import space from './images/space.jpg';
+import lightblue from './images/lightblue.png';
 
 // Create a scene
 const scene = new THREE.Scene();
