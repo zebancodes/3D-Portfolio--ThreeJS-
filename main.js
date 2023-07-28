@@ -21,6 +21,20 @@ const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 });
 
+renderer.setPixelRatio(window.devicePixelRatio); // Change 1
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.setZ(30);
+
+// Update camera and renderer size if window is resized
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', onWindowResize);
+
+renderer.render(scene, camera); // Change 5
+
 // Load textures
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
@@ -34,23 +48,12 @@ const textures = {
   torusTexture: textureLoader.load(silvergalaxy),
   torusTexture2: textureLoader.load(lightblue),
   backgroundTexture: textureLoader.load(space)
-  // Add other textures as needed...
 };
 
-renderer.setSize(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
-
-// Update camera and renderer size if window is resized
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+loadingManager.onLoad = function () { // Change 4
+  // Initial render of the scene after textures load
+  renderer.render(scene, camera);
 }
-window.addEventListener('resize', onWindowResize);
-
-// Initial render of the scene
-renderer.render(scene, camera);
 
 // Create lights
 const pointLight = new THREE.PointLight(0xffffff);
