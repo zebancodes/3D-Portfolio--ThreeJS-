@@ -10,37 +10,29 @@ import silvergalaxy from './images/silvergalaxy.jpg';
 import space from './images/space.jpg';
 import lightblue from './images/lightblue.png';
 
-// Create a scene
 const scene = new THREE.Scene();
-
-// Create a camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-// Create a renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 });
 
-renderer.setPixelRatio(window.devicePixelRatio); // Change 1
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 
-// Update camera and renderer size if window is resized
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 window.addEventListener('resize', onWindowResize);
+renderer.render(scene, camera);
 
-renderer.render(scene, camera); // Change 5
-
-// Load textures
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const textures = {
-  marioTexture: textureLoader.load(colin),
+  colinSquareTexture: textureLoader.load(colin),
   moonTexture: textureLoader.load(pink),
   normalTexture: textureLoader.load(lunarpink),
   moonTexture2: textureLoader.load(blueplanet),
@@ -50,29 +42,50 @@ const textures = {
   backgroundTexture: textureLoader.load(space)
 };
 
-loadingManager.onLoad = function () { // Change 4
-  // Initial render of the scene after textures load
+loadingManager.onLoad = function () {
   renderer.render(scene, camera);
 }
 
-// Create lights
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(5, 5, 5);
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
-// Add controls
 const controls = new OrbitControls(camera, renderer.domElement);
 
-// Create objects
-const mario = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: textures.marioTexture }));
-scene.add(mario);
-mario.position.z = -5;
-mario.position.x = 2;
+function createTriangleGeometry() {
+  const geometry = new THREE.BufferGeometry();
+  const vertices = new Float32Array([
+    0, 0, 0,
+    1, 0, 0,
+    0.5, Math.sqrt(3)/2, 0
+  ]);
+  geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+  
+  geometry.faces = [];
+  geometry.faces.push(new THREE.Face3(0, 1, 2, null, null, 0));
+  geometry.faces.push(new THREE.Face3(0, 2, 1, null, null, 1));
+  geometry.faces.push(new THREE.Face3(1, 0, 2, null, null, 2));
+  
+  return geometry;
+}
 
-const moon = createMoon(textures.moonTexture, textures.normalTexture, 30, -10);
-const moon2 = createMoon(textures.moonTexture2, textures.normalTexture, 50, -15);
-const moon3 = createMoon(textures.moonTexture3, textures.normalTexture, 70, -15);
+const triangleGeometry = createTriangleGeometry();
+
+const materials = [
+  new THREE.MeshBasicMaterial({ map: textures.colinSquareTexture }),
+  new THREE.MeshBasicMaterial({ map: textures.moonTexture }),
+  new THREE.MeshBasicMaterial({ map: textures.normalTexture })
+];
+
+const triangle = new THREE.Mesh(triangleGeometry, materials);
+scene.add(triangle);
+triangle.position.set(0, 0, -10);
+
+const colinSquare = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: textures.colinSquareTexture }));
+scene.add(colinSquare);
+colinSquare.position.z = -5;
+colinSquare.position.x = 2;
 
 function createMoon(moonTexture, normalTexture, positionZ, positionX) {
   const moon = new THREE.Mesh(
@@ -87,6 +100,10 @@ function createMoon(moonTexture, normalTexture, positionZ, positionX) {
   moon.position.setX(positionX);
   return moon;
 }
+
+const moon = createMoon(textures.moonTexture, textures.normalTexture, 30, -10);
+const moon2 = createMoon(textures.moonTexture2, textures.normalTexture, 50, -15);
+const moon3 = createMoon(textures.moonTexture3, textures.normalTexture, 70, -15);
 
 function createTorus(texture, geometryParams, rotationX, positionZ, positionX) {
   const geometry = new THREE.TorusGeometry(...geometryParams);
@@ -112,7 +129,6 @@ function addStar() {
   scene.add(star);
 }
 
-// Set background scene
 scene.background = textures.backgroundTexture;
 
 function moveCamera() {
@@ -126,8 +142,8 @@ function moveCamera() {
   moon3.rotation.x += 0.0125;
   moon3.rotation.y += 0.0125;
   moon3.rotation.z += 0.0125;
-  mario.rotation.y += 0.0125;
-  mario.rotation.z += 0.0125;
+  colinSquare.rotation.y += 0.0125;
+  colinSquare.rotation.z += 0.0125;
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
   camera.rotation.y = t * -0.0002;
