@@ -2,7 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import blueplanet from './images/blueplanet.jpg';
-import colin from './images/colin.jpg';
+import colin from './images/colin.png';
 import pink from './images/pink.jpg';
 import lunarpink from './images/lunarpink.jpg';
 import violetblue from './images/violetblue.png';
