@@ -89,7 +89,8 @@ const materials = [
 
 const triangle = new THREE.Mesh(createTriangleGeometry(), materials);
 scene.add(triangle);
-triangle.position.set(0, 0, 10); // Adjusted the z-position here.
+triangle.position.z = 10;  
+triangle.position.x = -2;
 
 // Create objects
 const colinSquare = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: textures.colinSquareTexture }));
