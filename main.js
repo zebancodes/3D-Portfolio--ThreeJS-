@@ -81,21 +81,16 @@ function createTriangleGeometry() {
   return geometry;
 }
 
-
-const triangleGeometry = new THREE.Mesh(triangleGeometry, materials);
-scene.add(triangle);
-triangle.position.set(0, 0, 10); // Adjusted the z-position here.
-
-
 const materials = [
   new THREE.MeshBasicMaterial({ map: textures.colinSquareTexture }),
   new THREE.MeshBasicMaterial({ map: textures.moonTexture }),
   new THREE.MeshBasicMaterial({ map: textures.normalTexture })
 ];
 
-const triangle = new THREE.Mesh(triangleGeometry, materials);
+const triangle = new THREE.Mesh(createTriangleGeometry(), materials);
 scene.add(triangle);
-triangle.position.set(0, 0, -10);
+triangle.position.set(0, 0, 10); // Adjusted the z-position here.
+
 // Create objects
 const colinSquare = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: textures.colinSquareTexture }));
 scene.add(colinSquare);
