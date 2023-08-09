@@ -2,7 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import blueplanet from './images/blueplanet.jpg';
-import colin from './images/colin.jpg';
+import colin1 from './images/colin1.jpg';
 import pink from './images/pink.jpg';
 import lunarpink from './images/lunarpink.jpg';
 import violetblue from './images/violetblue.png';
@@ -40,7 +40,7 @@ const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
 const textures = {
-  marioTexture: textureLoader.load(colin),
+  marioTexture: textureLoader.load(colin1),
   moonTexture: textureLoader.load(pink),
   normalTexture: textureLoader.load(lunarpink),
   moonTexture2: textureLoader.load(blueplanet),
