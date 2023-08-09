@@ -67,19 +67,20 @@ const controls = new OrbitControls(camera, renderer.domElement);
 function createTriangleGeometry() {
   const geometry = new THREE.BufferGeometry();
   const vertices = new Float32Array([
-    0, 0, 0,
-    1, 0, 0,
-    0.5, Math.sqrt(3)/2, 0
+      0, 0, 0, 
+      1, 0, 0,
+      0.5, Math.sqrt(3) / 2, 0
   ]);
   geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
-  
-  geometry.faces = [];
-  geometry.faces.push(new THREE.Face3(0, 1, 2, null, null, 0));
-  geometry.faces.push(new THREE.Face3(0, 2, 1, null, null, 1));
-  geometry.faces.push(new THREE.Face3(1, 0, 2, null, null, 2));
-  
+
+  // Correctly set up indices for the triangle
+  const indices = new Uint16Array([
+      0, 1, 2
+  ]);
+  geometry.setIndex(new THREE.BufferAttribute(indices, 1));
   return geometry;
 }
+
 
 const triangleGeometry = createTriangleGeometry();
 
