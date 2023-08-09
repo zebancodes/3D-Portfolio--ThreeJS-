@@ -10,24 +10,32 @@ import silvergalaxy from './images/silvergalaxy.jpg';
 import space from './images/space.jpg';
 import lightblue from './images/lightblue.png';
 
+// Create a scene
 const scene = new THREE.Scene();
+
+// Create a camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+// Create a renderer
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 });
 
-renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(window.devicePixelRatio); // Change 1
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 
+// Update camera and renderer size if window is resized
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 window.addEventListener('resize', onWindowResize);
-renderer.render(scene, camera);
 
+renderer.render(scene, camera); // Change 5
+
+// Load textures
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
 
@@ -42,15 +50,18 @@ const textures = {
   backgroundTexture: textureLoader.load(space)
 };
 
-loadingManager.onLoad = function () {
+loadingManager.onLoad = function () { // Change 4
+  // Initial render of the scene after textures load
   renderer.render(scene, camera);
 }
 
+// Create lights
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(5, 5, 5);
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
+// Add controls
 const controls = new OrbitControls(camera, renderer.domElement);
 
 function createTriangleGeometry() {
@@ -81,11 +92,15 @@ const materials = [
 const triangle = new THREE.Mesh(triangleGeometry, materials);
 scene.add(triangle);
 triangle.position.set(0, 0, -10);
-
+// Create objects
 const colinSquare = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: textures.colinSquareTexture }));
 scene.add(colinSquare);
 colinSquare.position.z = -5;
 colinSquare.position.x = 2;
+
+const moon = createMoon(textures.moonTexture, textures.normalTexture, 30, -10);
+const moon2 = createMoon(textures.moonTexture2, textures.normalTexture, 50, -15);
+const moon3 = createMoon(textures.moonTexture3, textures.normalTexture, 70, -15);
 
 function createMoon(moonTexture, normalTexture, positionZ, positionX) {
   const moon = new THREE.Mesh(
@@ -100,10 +115,6 @@ function createMoon(moonTexture, normalTexture, positionZ, positionX) {
   moon.position.setX(positionX);
   return moon;
 }
-
-const moon = createMoon(textures.moonTexture, textures.normalTexture, 30, -10);
-const moon2 = createMoon(textures.moonTexture2, textures.normalTexture, 50, -15);
-const moon3 = createMoon(textures.moonTexture3, textures.normalTexture, 70, -15);
 
 function createTorus(texture, geometryParams, rotationX, positionZ, positionX) {
   const geometry = new THREE.TorusGeometry(...geometryParams);
@@ -129,6 +140,7 @@ function addStar() {
   scene.add(star);
 }
 
+// Set background scene
 scene.background = textures.backgroundTexture;
 
 function moveCamera() {
