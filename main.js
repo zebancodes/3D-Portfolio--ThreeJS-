@@ -82,7 +82,10 @@ function createTriangleGeometry() {
 }
 
 
-const triangleGeometry = createTriangleGeometry();
+const triangleGeometry = new THREE.Mesh(triangleGeometry, materials);
+scene.add(triangle);
+triangle.position.set(0, 0, 10); // Adjusted the z-position here.
+
 
 const materials = [
   new THREE.MeshBasicMaterial({ map: textures.colinSquareTexture }),
