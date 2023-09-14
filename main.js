@@ -61,6 +61,7 @@ pointLight.position.set(5, 5, 5);
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
+// add random comment
 // Add controls
 const controls = new OrbitControls(camera, renderer.domElement);
 
